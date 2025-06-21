@@ -30,6 +30,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: ./src/ViFunction.Store
+          file: ./src/ViFunction.Store/Containerfile 
           platforms: linux/amd64
           push: true
           tags: ${{ secrets.REGISTRY }}/${{ secrets.GCP_PROJECT_ID }}/vi-function-test/vifunction-store:latest
