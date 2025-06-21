@@ -32,4 +32,4 @@ jobs:
           context: ./src/ViFunction.Store
           platforms: linux/amd64
           push: true
-          tags: ${{ secrets.REGISTRY }}/${{ secrets.GCP_PROJECT_ID }}/vi-function-test/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+          tags: ${{ secrets.REGISTRY }}/${{ secrets.GCP_PROJECT_ID }}/vi-function-test/vifunction-store:latest
