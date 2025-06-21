@@ -25,9 +25,3 @@ jobs:
       - name: Configure Docker for GCR
         run: |
           gcloud --quiet auth configure-docker ${{ secrets.REGISTRY }}
-
-      - name: Build Docker Image
-        run: |
-          IMAGE="${{ secrets.REGISTRY }}/${{ secrets.GCP_PROJECT_ID }}/my-image"
-          docker build -t $IMAGE:$GITHUB_SHA .
-          docker push $IMAGE:$GITHUB_SHA
