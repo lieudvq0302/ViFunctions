@@ -1,0 +1,32 @@
+# Use the official Go image as a build stage
+FROM golang:1.20 AS builder
+
+# Set the environment variables to build a static binary
+ENV CGO_ENABLED=0 GOOS=linux GOARCH=amd64
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy the go.mod and go.sum files
+COPY go.mod go.sum ./
+
+# Download the dependencies
+RUN go mod download
+
+# Copy the source code into the container
+COPY . .
+
+# Build the Go app
+RUN go build -o functionapp .
+
+# Use a minimal base image for the final stage
+FROM alpine:latest
+
+# Set the working directory
+WORKDIR /root/
+
+# Copy the compiled binary from the builder stage
+COPY --from=builder /app/functionapp .
+
+# Command to run the executable
+CMD ["./functionapp"]

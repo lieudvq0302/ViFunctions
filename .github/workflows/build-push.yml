@@ -1,0 +1,14 @@
+name: Build-Push Image
+
+on:
+  push:
+    branches:
+      - "develop"
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+
+    steps:
+        - name: Checkout
+          uses: actions/checkout@v3

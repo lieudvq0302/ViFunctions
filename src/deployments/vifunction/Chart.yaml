@@ -1,0 +1,24 @@
+apiVersion: v2
+name: vifunction
+description: A Helm chart for deploying vifunction
+version: 0.1.0
+dependencies:
+  - name: sharedlib
+    version: 0.1.0
+    repository: file://../sharedlib
+    alias: gateway
+
+  - name: sharedlib
+    version: 0.1.0
+    repository: file://../sharedlib
+    alias: store
+
+  - name: sharedlib
+    version: 0.1.0
+    repository: file://../sharedlib
+    alias: imagebuilder
+
+  - name: kubeops
+    version: 0.1.0
+    repository: file://../kubeops
+    alias: kubeops

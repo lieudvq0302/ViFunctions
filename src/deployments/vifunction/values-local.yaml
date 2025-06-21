@@ -1,0 +1,121 @@
+gateway:
+  namespace: vifunction-ns
+  image: docker.io/quangnguyen2017/vifunction-gateway:latest
+  privileged: false
+  service:
+    type: NodePort
+    port: 8080
+    nodePort: 30007
+  resources:
+    limits:
+      cpu: "500m"
+      memory: "256Mi"
+    requests:
+      cpu: "250m"
+      memory: "128Mi"
+  replicas: 1
+  config:
+    Services__BuilderUrl: "http://vifunction-imagebuilder:8080"
+    Services__DeployerUrl: "http://vifunction-kubeops:8080"
+    Services__StoreUrl: "http://vifunction-store:8080"
+    Services__KubeOpsUrl: "http://vifunction-kubeops:8080"
+  secrets:
+  hpa:
+    enabled: true
+    minReplicas: 1
+    maxReplicas: 5
+    targetCpuUtilizationPercentage: 80
+    targetRamUtilizationPercentage: 80
+  ingress:
+    enabled: true
+    annotations:
+      nginx.ingress.kubernetes.io/rewrite-target: /
+    hosts:
+      - host: minikube.local
+        paths:
+          - path: /gateway
+            pathType: Prefix
+    tls: []
+#-------------------------------------------------------------------------------#
+store:
+  namespace: vifunction-ns
+  image: docker.io/quangnguyen2017/vifunction-store:latest
+  privileged: false
+  service:
+    type: ClusterIP
+    port: 8080
+  resources:
+    limits:
+      cpu: "500m"
+      memory: "256Mi"
+    requests:
+      cpu: "250m"
+      memory: "128Mi"
+  replicas: 1
+  config:
+  secrets:
+    ConnectionStrings__FunctionsDatabase: "Server=mysql-release.mysql.svc.cluster.local;Database=FunctionDb;User=root;Password=P@ssw0rd;Port=3306;"
+  hpa:
+    enabled: true
+    minReplicas: 1
+    maxReplicas: 5
+    targetCpuUtilizationPercentage: 80
+    targetRamUtilizationPercentage: 80
+  ingress:
+    enabled: false
+#-------------------------------------------------------------------------------#
+imagebuilder:
+  namespace: vifunction-ns
+  image: docker.io/quangnguyen2017/vifunction-imagebuilder:latest
+  privileged: true
+  service:
+    type: ClusterIP
+    port: 8080
+  resources:
+    limits:
+      cpu: "500m"
+      memory: "256Mi"
+    requests:
+      cpu: "250m"
+      memory: "128Mi"
+  replicas: 1
+  config:
+    Registry__BaseUrl: "docker.io"
+  secrets:
+    Registry__User: "nguoikiemtim@gmail.com"
+    Registry__Path: "quangnguyen2017"
+    Registry__Password: "tichcobac555"
+  hpa:
+    enabled: true
+    minReplicas: 1
+    maxReplicas: 5
+    targetCpuUtilizationPercentage: 80
+    targetRamUtilizationPercentage: 80
+  ingress:
+    enabled: false
+#-------------------------------------------------------------------------------#
+kubeops:
+  namespace: vifunction-ns
+  image: docker.io/quangnguyen2017/vifunction-kubeops:latest
+  privileged: true
+  service:
+    type: ClusterIP
+    port: 8080
+  resources:
+    limits:
+      cpu: "500m"
+      memory: "256Mi"
+    requests:
+      cpu: "250m"
+      memory: "128Mi"
+  replicas: 1
+  config:
+  secrets:
+  hpa:
+    enabled: true
+    minReplicas: 1
+    maxReplicas: 5
+    targetCpuUtilizationPercentage: 80
+    targetRamUtilizationPercentage: 80
+  ingress:
+    enabled: false
