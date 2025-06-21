@@ -26,7 +26,7 @@ jobs:
         run: |
           gcloud --quiet auth configure-docker ${{ secrets.REGISTRY }}
 
-      - name: Build vifunction-store
+      - name: Build and push vifunction-store
         uses: docker/build-push-action@v3
         with:
           context: ./src/ViFunction.Store
@@ -35,7 +35,7 @@ jobs:
           push: true
           tags: ${{ secrets.REGISTRY }}/${{ secrets.GCP_PROJECT_ID }}/vi-function-test/vifunction-store:latest
       
-      - name: Build vifunction-gateway
+      - name: Build and push vifunction-gateway
         uses: docker/build-push-action@v3
         with:
           context: ./src/ViFunction.Gateway
@@ -44,7 +44,7 @@ jobs:
           push: true
           tags: ${{ secrets.REGISTRY }}/${{ secrets.GCP_PROJECT_ID }}/vi-function-test/vifunction-gateway:latest
       
-      - name: Build vifunction-imagebuilder
+      - name: Build and push vifunction-imagebuilder
         uses: docker/build-push-action@v3
         with:
           context: ./src/ViFunction.ImageBuilder
@@ -53,7 +53,7 @@ jobs:
           push: true
           tags: ${{ secrets.REGISTRY }}/${{ secrets.GCP_PROJECT_ID }}/vi-function-test/vifunction-imagebuilder:latest
 
-      - name: Build vifunction-kubeops
+      - name: Build and push vifunction-kubeops
         uses: docker/build-push-action@v3
         with:
           context: ./src/ViFunction.KubeOps
