@@ -25,3 +25,11 @@ jobs:
       - name: Configure Docker for GCR
         run: |
           gcloud --quiet auth configure-docker ${{ secrets.REGISTRY }}
+
+      - name: Build Image
+        uses: docker/build-push-action@v3
+        with:
+          context: ./src/ViFunction.Store
+          platforms: linux/amd64
+          push: true
+          tags: ${{ secrets.REGISTRY }}/${{ secrets.GCP_PROJECT_ID }}/vi-function-test/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
