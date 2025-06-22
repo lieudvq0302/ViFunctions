@@ -25,8 +25,8 @@ jobs:
         uses: google-github-actions/auth@v2
         with:
           token_format: 'access_token'
-          workload_identity_provider: 'projects/${{ secrets.GCP_PROJECT_ID }}/locations/global/workloadIdentityPools/github-actions/providers/github-actions-oidc'
-          service_account: 'gh-actions-deployer@vi-function-test.iam.gserviceaccount.com'
+          workload_identity_provider: 'projects/${{ secrets.GCP_PROJECT_NUMBER }}/locations/global/workloadIdentityPools/github-actions/providers/github-actions-oidc'
+          service_account: 'github-actions@sunlit-hook-450703-s2.iam.gserviceaccount.com'
       
 
       - name: Configure Docker for GCR
