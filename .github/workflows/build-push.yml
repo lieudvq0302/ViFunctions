@@ -13,6 +13,9 @@ env:
   GCP_PROJECT_ID: sunlit-hook-450703-s2
   GCP_PROJECT_NUMBER: 843717978288
   REGISTRY: asia-southeast1-docker.pkg.dev
+  GCP_WIF_POOL: github-actions-vi-function-test
+  GCP_WIF_PROVIDER: github-actions-oidc
+
 
 jobs:
   build:
@@ -31,7 +34,7 @@ jobs:
         with:
             create_credentials_file: true
             token_format: access_token
-            workload_identity_provider: projects/${{ env.GCP_PROJECT_NUMBER }}/locations/global/workloadIdentityPools/${{ secrets.GCP_WIF_POOL }}/providers/${{ secrets.GCP_WIF_PROVIDER }}
+            workload_identity_provider: projects/${{ env.GCP_PROJECT_NUMBER }}/locations/global/workloadIdentityPools/${{ env.GCP_WIF_POOL }}/providers/${{ env.GCP_WIF_PROVIDER }}
             service_account:  github-actions@${{ env.GCP_PROJECT_ID }}.iam.gserviceaccount.com
 
       - name: Configure Docker for GCR
