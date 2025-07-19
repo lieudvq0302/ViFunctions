@@ -9,6 +9,9 @@ permissions:
   id-token: write
   contents: read 
 
+env:
+  GCP_PROJECT_ID: sunlit-hook-450703-s2
+
 jobs:
   build:
     name: Build & Push
@@ -27,7 +30,7 @@ jobs:
             create_credentials_file: true
             token_format: access_token
             workload_identity_provider: projects/${{ secrets.GCP_PROJECT_NUMBER }}/locations/global/workloadIdentityPools/${{ secrets.GCP_WIF_POOL }}/providers/${{ secrets.GCP_WIF_PROVIDER }}
-            service_account:  github-actions@${{ secrets.GCP_PROJECT_ID }}.iam.gserviceaccount.com
+            service_account:  github-actions@${{ env.GCP_PROJECT_ID }}.iam.gserviceaccount.com
 
       - name: Configure Docker for GCR
         run: |
