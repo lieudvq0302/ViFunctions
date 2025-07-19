@@ -14,8 +14,7 @@ env:
   GCP_PROJECT_NUMBER: 843717978288
   REGISTRY: asia-southeast1-docker.pkg.dev
   GCP_WIF_POOL: github-actions-vi-function-test
-  GCP_WIF_PROVIDER: github-actions-oidc
-
+  GCP_WIF_PROVIDER: github-actions-vi-functions-test
 
 jobs:
   build:
