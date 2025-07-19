@@ -3,7 +3,7 @@ name: Build and Push images to GCR
 on:
   push:
     branches:
-      - develop
+      - prod
 
 permissions:
   id-token: write
