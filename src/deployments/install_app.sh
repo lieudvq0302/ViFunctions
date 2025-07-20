@@ -28,11 +28,11 @@ fi
 if helm ls -n $VI_KERNEL | grep $RELEASE_NAME >/dev/null 2>&1; then
   echo "Upgrading the Helm release..."
   # Upgrade the release
-  helm upgrade $RELEASE_NAME $CHART_DIR -n $VI_KERNEL -f vifunction/values-local.yaml
+  helm upgrade $RELEASE_NAME $CHART_DIR -n $VI_KERNEL -f vifunction/values-dev.yaml
 else
   echo "Installing the Helm release..."
   # Install the release
-  helm install $RELEASE_NAME $CHART_DIR -n $VI_KERNEL -f vifunction/values-local.yaml
+  helm install $RELEASE_NAME $CHART_DIR -n $VI_KERNEL -f vifunction/values-dev.yaml
 fi
 
 echo "Deployment complete."
