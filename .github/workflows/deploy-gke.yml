@@ -39,7 +39,7 @@ jobs:
 
       - name: Connect to GKE Cluster
         run: |
-          gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project $GCP_PROJECT_ID
+          gcloud container clusters get-credentials vifunction --region us-central1 --project sunlit-hook-450703-s2
 
       - name: Test GKE Connection
         run: |
