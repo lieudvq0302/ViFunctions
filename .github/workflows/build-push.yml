@@ -3,7 +3,7 @@ name: Build and Push images to GCR
 on:
   push:
     branches:
-      - refactor
+      - NEVER-TRIGGER-THIS
 
 permissions:
   id-token: write

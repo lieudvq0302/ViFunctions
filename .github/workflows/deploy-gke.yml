@@ -1,0 +1,44 @@
+name: Deploy to GKE
+
+on:
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  GCP_PROJECT_ID: sunlit-hook-450703-s2
+  GCP_PROJECT_NUMBER: 843717978288
+  GCP_WIF_POOL: github-actions-vi-function-test
+  GCP_WIF_PROVIDER: github-actions-vi-functions-test
+  GKE_CLUSTER: vifunction
+  GKE_ZONE: us-central1
+
+jobs:
+  deploy:
+    name: Deploy to GKE
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Authenticate to Google Cloud via Workload Identity Federation
+        uses: google-github-actions/auth@v2
+        with:
+          create_credentials_file: true
+          token_format: access_token
+          workload_identity_provider: projects/${{ env.GCP_PROJECT_NUMBER }}/locations/global/workloadIdentityPools/${{ env.GCP_WIF_POOL }}/providers/${{ env.GCP_WIF_PROVIDER }}
+          service_account: github-actions@${{ env.GCP_PROJECT_ID }}.iam.gserviceaccount.com
+
+      - name: Set up gcloud CLI
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Connect to GKE Cluster
+        run: |
+          gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project $GCP_PROJECT_ID
+
+      - name: Test GKE Connection
+        run: |
+          kubectl get nodes
