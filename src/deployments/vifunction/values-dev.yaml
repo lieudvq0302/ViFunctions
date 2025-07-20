@@ -8,10 +8,10 @@ gateway:
     nodePort: 30007
   resources:
     limits:
-      cpu: "500m"
+      cpu: "50m"
       memory: "256Mi"
     requests:
-      cpu: "250m"
+      cpu: "50m"
       memory: "128Mi"
   replicas: 1
   config:
@@ -46,10 +46,10 @@ store:
     port: 8080
   resources:
     limits:
-      cpu: "500m"
+      cpu: "50m"
       memory: "256Mi"
     requests:
-      cpu: "250m"
+      cpu: "50m"
       memory: "128Mi"
   replicas: 1
   config:
@@ -73,10 +73,10 @@ imagebuilder:
     port: 8080
   resources:
     limits:
-      cpu: "500m"
+      cpu: "50m"
       memory: "256Mi"
     requests:
-      cpu: "250m"
+      cpu: "50m"
       memory: "128Mi"
   replicas: 1
   config:
@@ -103,10 +103,10 @@ kubeops:
     port: 8080
   resources:
     limits:
-      cpu: "500m"
+      cpu: "50m"
       memory: "256Mi"
     requests:
-      cpu: "250m"
+      cpu: "50m"
       memory: "128Mi"
   replicas: 1
   config:
