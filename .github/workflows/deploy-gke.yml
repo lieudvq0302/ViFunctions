@@ -44,8 +44,6 @@ jobs:
 
       - name: Test Helm access using shell script
         run: |
-            cd src/deployments
-            chmod +x install_app.sh
-            ./install_app.sh
+            helm upgrade vifunction src/deployments/vifunction -n vifunction-ns -f src/deployments/vifunction/values-dev.yaml
       
         
