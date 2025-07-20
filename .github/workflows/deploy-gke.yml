@@ -20,7 +20,7 @@ env:
 
 jobs:
   deploy:
-    
+
     name: Deploy to GKE
     runs-on: ubuntu-latest
 
@@ -44,7 +44,12 @@ jobs:
 
       - name: Test Helm access using shell script
         run: |
-            chmod +x ./src/deployments/install_app.sh
-            ./src/deployments/install_app.sh
+            cd src/deployments/vifunction
+            helm dependency update
+            helm template vifunction . --namespace vifunction-ns --debug -f values-local.yaml
+
+            cd ..
+            chmod +x install_app.sh
+            ./install_app.sh
       
         
