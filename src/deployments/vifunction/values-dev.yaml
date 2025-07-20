@@ -1,6 +1,6 @@
 gateway:
   namespace: vifunction-ns
-  image: docker.io/quangnguyen2017/vifunction-gateway:latest
+  image: asia-southeast1-docker.pkg.dev/sunlit-hook-450703-s2/vi-function-test/vifunction-gateway:latest
   privileged: false
   service:
     type: NodePort
@@ -39,7 +39,7 @@ gateway:
 #-------------------------------------------------------------------------------#
 store:
   namespace: vifunction-ns
-  image: docker.io/quangnguyen2017/vifunction-store:latest
+  image: asia-southeast1-docker.pkg.dev/sunlit-hook-450703-s2/vi-function-test/vifunction-store:latest
   privileged: false
   service:
     type: ClusterIP
@@ -66,7 +66,7 @@ store:
 #-------------------------------------------------------------------------------#
 imagebuilder:
   namespace: vifunction-ns
-  image: docker.io/quangnguyen2017/vifunction-imagebuilder:latest
+  image: asia-southeast1-docker.pkg.dev/sunlit-hook-450703-s2/vi-function-test/vifunction-imagebuilder:latest
   privileged: true
   service:
     type: ClusterIP
@@ -96,7 +96,7 @@ imagebuilder:
 #-------------------------------------------------------------------------------#
 kubeops:
   namespace: vifunction-ns
-  image: docker.io/quangnguyen2017/vifunction-kubeops:latest
+  image: asia-southeast1-docker.pkg.dev/sunlit-hook-450703-s2/vi-function-test/vifunction-kubeops:latest
   privileged: true
   service:
     type: ClusterIP
