@@ -1,7 +1,9 @@
 name: Deploy to GKE
 
 on:
-  workflow_dispatch:
+    push:
+      branches:
+        - refactor
 
 permissions:
   id-token: write
