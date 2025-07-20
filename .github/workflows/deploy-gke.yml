@@ -65,6 +65,9 @@ jobs:
             containers:
             - name: vifunction-store
               image: ${{ env.REGISTRY }}/${{ env.GCP_PROJECT_ID }}/vi-function-test/vifunction-store:latest
+              env:
+                - name: ConnectionStrings__FunctionsDatabase
+                  value: "Server=34.170.59.160;Database=FunctionDb;User=vi-function;Password=P@ssw0rd;Port=3306;"
             restartPolicy: Never
           EOF
       
