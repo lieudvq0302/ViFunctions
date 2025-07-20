@@ -32,12 +32,15 @@ jobs:
           workload_identity_provider: projects/${{ env.GCP_PROJECT_NUMBER }}/locations/global/workloadIdentityPools/${{ env.GCP_WIF_POOL }}/providers/${{ env.GCP_WIF_PROVIDER }}
           service_account: github-actions@${{ env.GCP_PROJECT_ID }}.iam.gserviceaccount.com
 
-      - name: get-credentials
+      - name: Get GKE credentials
         uses: 'google-github-actions/get-gke-credentials@v2'
         with:
           cluster_name: ${{ env.GKE_CLUSTER }}
           location: ${{ env.GKE_ZONE }}
 
-      - name: Test GKE Connection
-        run: |
-          kubectl get nodes
+      - name: Test Helm access
+        run: helm list -A
+        
+      - name: Test get pods
+        run: kubectl get pods -A
+        
