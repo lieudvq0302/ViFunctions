@@ -14,8 +14,8 @@ env:
   GCP_PROJECT_NUMBER: 843717978288
   GCP_WIF_POOL: github-actions-vi-function-test
   GCP_WIF_PROVIDER: github-actions-vi-functions-test
-  GKE_CLUSTER: vifunction
-  GKE_ZONE: us-central1
+  GKE_CLUSTER: vi-function
+  GKE_ZONE: us-central1-a
   REGISTRY: asia-southeast1-docker.pkg.dev
 
 jobs:
@@ -47,7 +47,7 @@ jobs:
             cd src/deployments/vifunction
             helm dependency update
             helm template vifunction . --namespace vifunction-ns --debug -f values-local.yaml
-            
+
             cd ..
             chmod +x install_app.sh
             ./install_app.sh
