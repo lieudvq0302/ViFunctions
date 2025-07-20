@@ -39,39 +39,9 @@ jobs:
           cluster_name: ${{ env.GKE_CLUSTER }}
           location: ${{ env.GKE_ZONE }}
 
-      - name: Test Helm access
-        run: helm list -A
-        
-      - name: Test get pods
-        run: kubectl get pods -A
-
-      - name: Create namespace if not exists
+      - name: Test Helm access using shell script
         run: |
-          kubectl get namespace vifunction-ns || kubectl create namespace vifunction-ns
-
-      - name: Check namespace
-        run: |
-          kubectl get namespaces
-
-      - name: Deploy test pod pulling image from GAR
-        run: |
-          cat <<EOF | kubectl apply -f -
-          apiVersion: v1
-          kind: Pod
-          metadata:
-            name: vifunction-store
-            namespace: vifunction-ns
-          spec:
-            containers:
-            - name: vifunction-store
-              image: ${{ env.REGISTRY }}/${{ env.GCP_PROJECT_ID }}/vi-function-test/vifunction-store:latest
-              env:
-                - name: ConnectionStrings__FunctionsDatabase
-                  value: "Server=34.170.59.160;Database=FunctionDb;User=vi-function;Password=P@ssw0rd;Port=3306;"
-            restartPolicy: Never
-          EOF
-      
-      - name: Check pod status
-        run: kubectl get pods -n vifunction-ns
+            chmod +x ./src/deployments/install_app.sh
+            ./src/deployments/install_app.sh
       
         
