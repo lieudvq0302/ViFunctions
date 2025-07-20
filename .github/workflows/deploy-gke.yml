@@ -20,10 +20,13 @@ env:
 
 jobs:
   deploy:
+    
     name: Deploy to GKE
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
       - name: Authenticate to Google Cloud via Workload Identity Federation
         uses: google-github-actions/auth@v2
