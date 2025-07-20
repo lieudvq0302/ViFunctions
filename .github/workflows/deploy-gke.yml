@@ -44,11 +44,7 @@ jobs:
 
       - name: Test Helm access using shell script
         run: |
-            cd src/deployments/vifunction
-            helm dependency update
-            helm template vifunction . --namespace vifunction-ns --debug -f values-local.yaml
-
-            cd ..
+            cd src/deployments
             chmod +x install_app.sh
             ./install_app.sh
       
